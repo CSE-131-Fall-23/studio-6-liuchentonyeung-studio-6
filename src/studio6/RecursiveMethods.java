@@ -12,10 +12,14 @@ public class RecursiveMethods {
 	 *         ...)
 	 */
 	public static double geometricSum(int n) {
-		
-			// FIXME compute the geometric sum for the first n terms recursively
+		// basecase
+		if (n==0) {
 			return 0;
-		
+		}
+		else {
+			return Math.pow(0.5, n) + geometricSum(n-1);
+		}
+		// FIXME compute the geometric sum for the first n terms recursively
 	}
 
 	/**
@@ -27,13 +31,13 @@ public class RecursiveMethods {
 	 * @return greatest common divisor of p and q
 	 */
 	public static int gcd(int p, int q) {
-		
-			// FIXME compute the gcd of p and q using recursion
-			return 0;
-		
+		if (p%q == 0) {
+			return q;
+		}
+		else {
+			return gcd(q, p%q);
+		}
 	}
-
-	
 
 	/**
 	 * This method uses recursion to create a reverse of the given array
@@ -42,10 +46,21 @@ public class RecursiveMethods {
 	 * @return an array with the same data as the input but it reverse order
 	 */
 	public static int[] toReversed(int[] array) {
+		int index =0;
+		int[] reversedArray = new int[array.length];
 		
-			// FIXME create a helper method that can recursively reverse the given array
-			return new int[0];
-		
+		return toReversedHelper(array, index, reversedArray);
+		// FIXME create a helper method that can recursively reverse the given array
+	}
+
+	public static int[] toReversedHelper(int[] array, int index, int[] reversedArray) {
+		if(index == array.length) {
+			return reversedArray;
+		}
+		else {
+			reversedArray[index] = array[array.length - 1 - index];
+			return toReversedHelper(array, index + 1, reversedArray);
+		}
 	}
 
 	/**
@@ -61,6 +76,13 @@ public class RecursiveMethods {
 			double radiusMinimumDrawingThreshold) {
 		
 		// FIXME
+		if(radius > radiusMinimumDrawingThreshold){
+			StdDraw.circle(xCenter, yCenter, radius);
+			circlesUponCircles(xCenter + radius, yCenter, radius/3.0, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter - radius, yCenter, radius/3.0, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter, yCenter + radius, radius/3.0, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter, yCenter - radius, radius/3.0, radiusMinimumDrawingThreshold);
+		}
 	}
 
 }
